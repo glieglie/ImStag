@@ -1,317 +1,398 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>The Stag Escape</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mathematics — Room 204</title>
 
-    <style>
-        body {
-            margin: 0;
-            background: #dce8d5;
-            color: #182018;
-            font-family: Arial, sans-serif;
-            text-align: center;
-            transition: 2s;
-        }
+<style>
+    * {
+        box-sizing: border-box;
+    }
 
-        .classroom {
-            max-width: 850px;
-            margin: auto;
-            padding: 35px;
-            min-height: 100vh;
-            box-sizing: border-box;
-        }
+    body {
+        margin: 0;
+        background: #d7d7d2;
+        color: #252525;
+        font-family: Georgia, "Times New Roman", serif;
+        transition: background 3s, color 3s;
+    }
 
-        h1 {
-            font-size: 42px;
-            letter-spacing: 5px;
-        }
+    .page {
+        width: min(900px, 92%);
+        margin: auto;
+        padding: 55px 0 100px;
+    }
 
-        .stag {
-            font-size: 120px;
-            margin: 20px;
-            transition: 2s;
-        }
+    .header {
+        border-bottom: 1px solid #999;
+        padding-bottom: 15px;
+        margin-bottom: 40px;
+    }
 
-        .blackboard {
-            background: #24452c;
-            color: white;
-            border: 8px solid #70452b;
-            padding: 25px;
-            margin: 30px auto;
-            max-width: 650px;
-            box-shadow: 0 8px 20px #888;
-        }
+    .header small {
+        color: #666;
+        letter-spacing: 2px;
+    }
 
-        .equation {
-            font-size: 32px;
-        }
+    h1 {
+        font-size: 34px;
+        font-weight: normal;
+        margin: 8px 0 0;
+    }
 
-        input {
-            padding: 12px;
-            width: 130px;
-            font-size: 18px;
-            text-align: center;
-        }
+    .classroom {
+        background: #e7e7e2;
+        border: 1px solid #b4b4ae;
+        padding: 45px;
+        min-height: 650px;
+        box-shadow: 0 10px 35px rgba(0,0,0,.08);
+    }
 
-        button {
-            padding: 12px 20px;
-            font-size: 18px;
-            cursor: pointer;
-            margin: 5px;
-        }
+    .window {
+        height: 110px;
+        background: #b8c0c1;
+        border: 10px solid #777;
+        margin-bottom: 35px;
+        position: relative;
+        overflow: hidden;
+    }
 
-        #message,
-        #message2 {
-            margin-top: 20px;
-            min-height: 25px;
-        }
+    .window:after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 0;
+        bottom: 0;
+        width: 4px;
+        background: #777;
+    }
 
-        .hidden {
-            display: none;
-        }
+    .board {
+        background: #26332c;
+        color: #d8ddd8;
+        border: 8px solid #6e543c;
+        padding: 30px;
+        margin-bottom: 35px;
+        min-height: 210px;
+    }
 
-        /* HORROR MODE */
+    .board h2 {
+        font-weight: normal;
+        margin-top: 0;
+    }
 
-        body.horror {
-            background: #050505;
-            color: #aaa;
-        }
+    .equation {
+        font-size: 30px;
+        margin: 35px 0;
+    }
 
-        body.horror .classroom {
-            background: #050505;
-        }
+    .desk {
+        border-top: 1px solid #aaa;
+        padding-top: 25px;
+    }
 
-        body.horror .blackboard {
-            background: #090909;
-            border-color: #222;
-            box-shadow: none;
-        }
+    input {
+        padding: 11px;
+        width: 120px;
+        font-size: 17px;
+        background: #f4f4f0;
+        border: 1px solid #999;
+    }
 
-        body.horror .stag {
-            filter: grayscale(1);
-            transform: scale(1.3);
-        }
+    button {
+        padding: 11px 18px;
+        font-size: 16px;
+        background: #ededE8;
+        border: 1px solid #999;
+        cursor: pointer;
+    }
 
-        body.horror h1 {
-            color: #555;
-            letter-spacing: 12px;
-        }
+    button:hover {
+        background: #ddd;
+    }
 
-        .glitch {
-            animation: glitch 0.15s infinite;
-        }
+    .message {
+        min-height: 25px;
+        margin-top: 18px;
+    }
 
-        @keyframes glitch {
-            0% { transform: translate(0); }
-            25% { transform: translate(4px, -2px); }
-            50% { transform: translate(-3px, 3px); }
-            75% { transform: translate(2px, 1px); }
-            100% { transform: translate(0); }
-        }
+    .hidden {
+        display: none;
+    }
 
-        #horrorText {
-            font-family: monospace;
-            font-size: 20px;
-            line-height: 2;
-            margin: 40px auto;
-            max-width: 650px;
-        }
+    .note {
+        background: #eee9d8;
+        border: 1px solid #aaa;
+        padding: 25px;
+        margin-top: 25px;
+        color: #333;
+    }
 
-        .red {
-            color: #8b0000;
-        }
-    </style>
+    /* AFTER THE TWIST */
+
+    body.after {
+        background: #0d0d0c;
+        color: #999;
+    }
+
+    body.after .header small {
+        color: #555;
+    }
+
+    body.after .header {
+        border-color: #333;
+    }
+
+    body.after .classroom {
+        background: #10100f;
+        border-color: #252525;
+        box-shadow: none;
+    }
+
+    body.after .window {
+        background: #090909;
+        border-color: #292929;
+    }
+
+    body.after .window:after {
+        background: #292929;
+    }
+
+    body.after .board {
+        background: #111612;
+        border-color: #30271e;
+        color: #777;
+    }
+
+    body.after button,
+    body.after input {
+        background: #111;
+        color: #777;
+        border-color: #444;
+    }
+
+    .story {
+        line-height: 1.9;
+        font-size: 18px;
+        max-width: 650px;
+        margin: 40px auto;
+        min-height: 180px;
+    }
+
+    .quiet {
+        color: #666;
+        font-size: 14px;
+    }
+
+    .wrong {
+        color: #777;
+        font-style: italic;
+    }
+</style>
 </head>
 
 <body>
 
-<div class="classroom">
+<div class="page">
 
-    <h1 id="title">THE STAG ESCAPE</h1>
-
-    <p id="subtitle">ROOM 1 — THE CLASSROOM</p>
-
-    <div class="stag" id="stag">🦌</div>
-
-    <p id="intro">
-        The bell has rung.
-    </p>
-
-    <p id="intro2">
-        Somehow, a stag has been trapped inside the math classroom.
-    </p>
-
-    <div class="blackboard">
-
-        <h2 id="boardTitle">THE BLACKBOARD</h2>
-
-        <p id="question">
-            Solve the equation to unlock the cabinet.
-        </p>
-
-        <p class="equation">
-            12 + 7 × 3 − 5
-        </p>
-
-        <input id="answer1" type="number">
-
-        <button onclick="checkFirst()">
-            Submit
-        </button>
-
-        <div id="message"></div>
-
+    <div class="header">
+        <small>ROOM 204 • MATHEMATICS</small>
+        <h1>End of Term Examination</h1>
     </div>
 
-    <div id="secondPuzzle" class="blackboard hidden">
+    <div class="classroom">
 
-        <h2>THE SECOND LOCK</h2>
+        <div class="window"></div>
 
         <p>
-            How many numbers are in the equation?
+            The classroom is empty.
         </p>
 
-        <p class="equation">
-            12 + 7 × 3 − 5
+        <p>
+            The clock says 14:37.
         </p>
 
-        <input id="answer2" type="number">
+        <p>
+            You don't remember entering this room.
+        </p>
 
-        <button onclick="checkSecond()">
-            Submit
-        </button>
+        <div class="board">
 
-        <div id="message2"></div>
+            <h2>Exercise 1</h2>
+
+            <p>
+                Solve the following:
+            </p>
+
+            <div class="equation">
+                12 + 7 × 3 − 5
+            </div>
+
+            <input id="answer1" type="number">
+            <button onclick="firstPuzzle()">Submit</button>
+
+            <div id="message1" class="message"></div>
+
+        </div>
+
+        <div id="second" class="hidden">
+
+            <div class="note">
+                <strong>Note found inside the teacher's desk.</strong>
+
+                <p>
+                    If you are reading this, the classroom has not been
+                    completely reset yet.
+                </p>
+
+                <p>
+                    Count the numbers in Exercise 1.
+                </p>
+            </div>
+
+            <div class="board" style="margin-top:30px;">
+
+                <h2>Exercise 2</h2>
+
+                <p>
+                    How many numbers were present in the previous exercise?
+                </p>
+
+                <input id="answer2" type="number">
+                <button onclick="secondPuzzle()">Submit</button>
+
+                <div id="message2" class="message"></div>
+
+            </div>
+
+        </div>
+
+        <div id="twist" class="hidden">
+
+            <div class="story" id="story"></div>
+
+            <button id="continue" onclick="continueStory()">
+                Continue
+            </button>
+
+        </div>
 
     </div>
-
-    <div id="horror" class="hidden">
-
-        <h2 class="red glitch">WAIT.</h2>
-
-        <div id="horrorText"></div>
-
-        <button onclick="continueHorror()">
-            Continue
-        </button>
-
-    </div>
-
 </div>
 
 
 <script>
 
-function checkFirst() {
+function firstPuzzle() {
 
-    let answer = document.getElementById("answer1").value;
+    const answer = document.getElementById("answer1").value;
+    const message = document.getElementById("message1");
 
     if (answer == 28) {
 
-        document.getElementById("message").innerHTML =
-            "🔓 Correct! The cabinet opens.";
+        message.textContent = "Correct.";
 
-        document.getElementById("secondPuzzle")
-            .classList.remove("hidden");
+        setTimeout(() => {
+            document.getElementById("second")
+                .classList.remove("hidden");
+        }, 700);
 
     } else {
 
-        document.getElementById("message").innerHTML =
-            "❌ Wrong! Try again.";
-
+        message.textContent = "Incorrect.";
     }
 }
 
 
-function checkSecond() {
+function secondPuzzle() {
 
-    let answer = document.getElementById("answer2").value;
+    const answer = document.getElementById("answer2").value;
+    const message = document.getElementById("message2");
 
     if (answer == 4) {
 
-        startHorror();
+        message.textContent = "Correct.";
+
+        setTimeout(beginTwist, 1500);
 
     } else {
 
-        document.getElementById("message2").innerHTML =
-            "❌ Wrong. The lock refuses to open.";
-
+        message.textContent = "Incorrect.";
     }
 }
 
 
-function startHorror() {
+function beginTwist() {
 
-    document.body.classList.add("horror");
+    document.body.classList.add("after");
 
-    document.getElementById("secondPuzzle")
+    document.getElementById("second")
         .classList.add("hidden");
 
-    document.getElementById("title").innerText =
-        "THE STAG ESCAPE";
+    document.querySelector(".window").style.opacity = "0.15";
 
-    document.getElementById("subtitle").innerText =
-        "ROOM 1";
-
-    document.getElementById("intro").innerText =
-        "";
-
-    document.getElementById("intro2").innerText =
-        "";
-
-    document.getElementById("boardTitle").innerText =
-        "";
-
-    document.getElementById("question").innerText =
-        "";
-
-    document.querySelector(".equation").innerText =
-        "";
-
-    document.getElementById("stag").innerText =
-        "🦌";
-
-    document.getElementById("horror")
+    document.getElementById("twist")
         .classList.remove("hidden");
 
-    document.getElementById("horrorText").innerHTML =
-        "The door should have opened.<br><br>" +
-        "It didn't.<br><br>" +
-        "The stag is no longer looking at the door.<br><br>" +
-        "It's looking at <b>you.</b>";
+    document.getElementById("story").innerHTML =
+        "The answer is correct.<br><br>" +
+        "You wait for something to happen.<br><br>" +
+        "Nothing does.<br><br>" +
+        "<span class='quiet'>14:37</span><br><br>" +
+        "You look at the clock again.<br><br>" +
+        "14:37.";
 
 }
 
 
-function continueHorror() {
+function continueStory() {
 
-    document.getElementById("horrorText").innerHTML =
-        "You solved the puzzles exactly as instructed.<br><br>" +
-        "So why are you still here?<br><br>" +
-        "<span class='red'>THE STAG WAS NEVER TRAPPED.</span><br><br>" +
-        "The classroom was.<br><br>" +
-        "And you just unlocked it.";
+    document.getElementById("story").innerHTML =
+        "You look back at the blackboard.<br><br>" +
+        "The equation is still there.<br><br>" +
+        "<span class='wrong'>12 + 7 × 3 − 5 = 27</span><br><br>" +
+        "You know that is wrong.<br><br>" +
+        "You solved it already.<br><br>" +
+        "Someone has written a sentence underneath it.";
 
-    document.querySelector("#horror button").innerText =
-        "I WANT TO LEAVE";
 
-    document.querySelector("#horror button").onclick =
-        finalMessage;
+    document.getElementById("continue").onclick = finalTwist;
 
 }
 
 
-function finalMessage() {
+function finalTwist() {
 
-    document.getElementById("horrorText").innerHTML =
-        "<span class='red'>YOU OPENED THE DOOR.</span><br><br>" +
-        "But you were never supposed to.";
+    document.getElementById("story").innerHTML =
+        "The sentence reads:<br><br>" +
+        "<strong>YOU WERE NOT SUPPOSED TO SOLVE THAT.</strong><br><br>" +
+        "You turn around.<br><br>" +
+        "The classroom is exactly as it was before.<br><br>" +
+        "Except the door is open.<br><br>" +
+        "And there is no stag.";
 
-    document.querySelector("#horror button")
-        .style.display = "none";
+    document.getElementById("continue").textContent =
+        "Leave the classroom";
 
-    document.getElementById("stag").classList.add("glitch");
+    document.getElementById("continue").onclick = ending;
 
+}
+
+
+function ending() {
+
+    document.getElementById("story").innerHTML =
+        "You step into the hallway.<br><br>" +
+        "The door closes behind you.<br><br>" +
+        "A piece of paper has been placed on the floor.<br><br>" +
+        "<span class='wrong'>EXAMINATION COMPLETE</span><br><br>" +
+        "Underneath it is another line:<br><br>" +
+        "<strong>ROOM 204 — OCCUPIED: 1</strong><br><br>" +
+        "You look back at the classroom.<br><br>" +
+        "There is someone sitting at your desk.";
+
+    document.getElementById("continue").style.display = "none";
 }
 
 </script>
