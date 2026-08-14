@@ -5,40 +5,105 @@
 
     <style>
         body {
-            background: #111;
-            color: white;
+            margin: 0;
+            background: #0b0b0b;
+            color: #ddd;
             font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 60px;
         }
 
         .classroom {
-            max-width: 700px;
+            max-width: 900px;
             margin: auto;
+            min-height: 100vh;
             padding: 30px;
-            border: 2px solid #555;
-            background: #1b1b1b;
+            box-sizing: border-box;
+            background: #171717;
+            text-align: center;
+        }
+
+        h1 {
+            color: #eee;
+            letter-spacing: 4px;
+        }
+
+        .subtitle {
+            color: #777;
         }
 
         .stag {
-            font-size: 100px;
+            font-size: 120px;
+            margin: 20px;
+        }
+
+        .blackboard {
+            background: #17241c;
+            border: 8px solid #5a3824;
+            padding: 25px;
+            margin: 30px auto;
+            max-width: 650px;
+            box-shadow: 0 0 20px #000;
+        }
+
+        .equation {
+            font-size: 32px;
+            color: #eee;
         }
 
         input {
             padding: 12px;
+            width: 130px;
             font-size: 18px;
-            width: 150px;
+            text-align: center;
+            background: #222;
+            color: white;
+            border: 1px solid #555;
         }
 
         button {
             padding: 12px 20px;
+            margin-left: 5px;
             font-size: 18px;
+            background: #333;
+            color: white;
+            border: 1px solid #666;
             cursor: pointer;
         }
 
-        #result {
+        button:hover {
+            background: #555;
+        }
+
+        .cabinet {
+            margin: 30px auto;
+            padding: 25px;
+            max-width: 500px;
+            border: 3px solid #704b2e;
+            background: #302116;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .note {
+            background: #d8c99b;
+            color: #222;
+            padding: 20px;
             margin-top: 20px;
-            font-size: 20px;
+            font-family: Georgia, serif;
+        }
+
+        .door {
+            margin: 40px auto;
+            padding: 30px;
+            max-width: 400px;
+            border: 5px solid #444;
+            background: #202020;
+        }
+
+        #message {
+            margin-top: 20px;
+            min-height: 25px;
         }
     </style>
 </head>
@@ -49,42 +114,189 @@
 
     <h1>THE STAG ESCAPE</h1>
 
+    <p class="subtitle">ROOM 1 — THE CLASSROOM</p>
+
     <div class="stag">🦌</div>
 
-    <p>The math class is empty.</p>
-    <p>The door is locked.</p>
-    <p>Somehow, the stag is trapped inside.</p>
+    <p>
+        The bell has rung.
+    </p>
 
-    <hr>
+    <p>
+        The classroom is empty.
+    </p>
 
-    <h2>THE BLACKBOARD</h2>
+    <p>
+        Except for the stag.
+    </p>
 
-    <p>The teacher left one equation behind:</p>
+    <p>
+        The door is locked.
+    </p>
 
-    <h2>12 + 7 × 3 − 5 = ?</h2>
+    <!-- FIRST PUZZLE -->
 
-    <p>Enter the answer to unlock the door.</p>
+    <div class="blackboard">
 
-    <input id="answer" type="number">
-    <button onclick="checkAnswer()">Unlock</button>
+        <h2>THE BLACKBOARD</h2>
 
-    <div id="result"></div>
+        <p>Someone has written an equation on the board:</p>
+
+        <p class="equation">
+            12 + 7 × 3 − 5
+        </p>
+
+        <p>
+            Solve it. The answer may be important.
+        </p>
+
+        <input id="answer1" type="number">
+        <button onclick="checkFirst()">Submit</button>
+
+        <div id="message"></div>
+
+    </div>
+
+
+    <!-- CABINET -->
+
+    <div id="cabinet" class="cabinet hidden">
+
+        <h2>🔓 CABINET UNLOCKED</h2>
+
+        <p>
+            Inside the cabinet you find an old piece of paper.
+        </p>
+
+        <div class="note">
+
+            <h3>THE TEACHER'S NOTE</h3>
+
+            <p>
+                "The first number is not the answer."
+            </p>
+
+            <p>
+                "Look at the equation again."
+            </p>
+
+            <p>
+                "Count the numbers."
+            </p>
+
+            <p>
+                "That number will open the next lock."
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- SECOND PUZZLE -->
+
+    <div id="secondPuzzle" class="blackboard hidden">
+
+        <h2>THE SECOND LOCK</h2>
+
+        <p>
+            How many numbers appear in the equation?
+        </p>
+
+        <p class="equation">
+            12 + 7 × 3 − 5
+        </p>
+
+        <input id="answer2" type="number">
+        <button onclick="checkSecond()">Submit</button>
+
+        <div id="message2"></div>
+
+    </div>
+
+
+    <!-- EXIT -->
+
+    <div id="exit" class="door hidden">
+
+        <h2>🚪 CLASSROOM DOOR</h2>
+
+        <p>
+            You hear a click.
+        </p>
+
+        <p>
+            The lock has opened.
+        </p>
+
+        <button onclick="escape()">
+            OPEN THE DOOR
+        </button>
+
+        <div id="ending"></div>
+
+    </div>
 
 </div>
 
+
 <script>
-function checkAnswer() {
-    let answer = document.getElementById("answer").value;
-    let result = document.getElementById("result");
+
+function checkFirst() {
+
+    let answer = document.getElementById("answer1").value;
+    let message = document.getElementById("message");
 
     if (answer == 28) {
-        result.innerHTML =
-            "🔓 CLICK... The classroom door opens. But something is waiting outside...";
+
+        message.innerHTML =
+            "🔓 Correct. Something inside the cabinet clicks.";
+
+        document.getElementById("cabinet").classList.remove("hidden");
+
+        document.getElementById("secondPuzzle").classList.remove("hidden");
+
     } else {
-        result.innerHTML =
-            "❌ Wrong. The stag stares at you.";
+
+        message.innerHTML =
+            "❌ Wrong. The stag looks at the blackboard.";
+
     }
 }
+
+
+function checkSecond() {
+
+    let answer = document.getElementById("answer2").value;
+    let message = document.getElementById("message2");
+
+    if (answer == 4) {
+
+        message.innerHTML =
+            "🔓 Correct. You hear the classroom door unlock.";
+
+        document.getElementById("exit").classList.remove("hidden");
+
+    } else {
+
+        message.innerHTML =
+            "❌ Wrong. The lock doesn't move.";
+
+    }
+}
+
+
+function escape() {
+
+    document.getElementById("ending").innerHTML =
+        "<h2>THE DOOR OPENS.</h2>" +
+        "<p>The stag steps into the hallway.</p>" +
+        "<p>But something is written on the wall...</p>" +
+        "<h2>ROOM 2</h2>" +
+        "<p>TO BE CONTINUED...</p>";
+
+}
+
 </script>
 
 </body>
