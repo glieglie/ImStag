@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>The Stag Escape</title>
+
+    <style>
+        body {
+            background: #111;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 60px;
+        }
+
+        .classroom {
+            max-width: 700px;
+            margin: auto;
+            padding: 30px;
+            border: 2px solid #555;
+            background: #1b1b1b;
+        }
+
+        .stag {
+            font-size: 100px;
+        }
+
+        input {
+            padding: 12px;
+            font-size: 18px;
+            width: 150px;
+        }
+
+        button {
+            padding: 12px 20px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="classroom">
+
+    <h1>THE STAG ESCAPE</h1>
+
+    <div class="stag">🦌</div>
+
+    <p>The math class is empty.</p>
+    <p>The door is locked.</p>
+    <p>Somehow, the stag is trapped inside.</p>
+
+    <hr>
+
+    <h2>THE BLACKBOARD</h2>
+
+    <p>The teacher left one equation behind:</p>
+
+    <h2>12 + 7 × 3 − 5 = ?</h2>
+
+    <p>Enter the answer to unlock the door.</p>
+
+    <input id="answer" type="number">
+    <button onclick="checkAnswer()">Unlock</button>
+
+    <div id="result"></div>
+
+</div>
+
+<script>
+function checkAnswer() {
+    let answer = document.getElementById("answer").value;
+    let result = document.getElementById("result");
+
+    if (answer == 28) {
+        result.innerHTML =
+            "🔓 CLICK... The classroom door opens. But something is waiting outside...";
+    } else {
+        result.innerHTML =
+            "❌ Wrong. The stag stares at you.";
+    }
+}
+</script>
+
+</body>
+</html>
